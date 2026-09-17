@@ -29,19 +29,9 @@ public partial class MainViewModel(
         if (!settingsService.IsUkraineSupportMessageEnabled)
             return;
 
-        var dialog = viewModelManager.GetMessageBoxViewModel(
-            localizationManager.UkraineSupportTitle,
-            localizationManager.UkraineSupportMessage,
-            localizationManager.LearnMoreButton,
-            localizationManager.CloseButton
-        );
-
         // Disable this message in the future
         settingsService.IsUkraineSupportMessageEnabled = false;
         settingsService.Save();
-
-        if (await dialogManager.ShowDialogAsync(dialog) == true)
-            Process.StartShellExecute("https://tyrrrz.me/ukraine?source=youtubedownloader");
     }
 
     private async Task ShowDevelopmentBuildMessageAsync()
